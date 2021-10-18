@@ -1,0 +1,20 @@
+server {
+    listen 9999;
+    listen [::]:9999;
+
+    server_name omni_proxy;
+
+    root /app;
+
+    access_log /var/log/nginx/omni-access.log;
+    error_log /var/log/nginx/omni-error.log;
+
+    location / {
+        proxy_pass http://localhost:7000;
+    }
+
+    location /static/ {
+        alias /app/statics/;
+        autoindex on;
+    }
+}
