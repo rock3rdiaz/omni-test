@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+
 import environ
 
-
-# read .env file
+# read .env.example file
 env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'api',
     'ecomerce',
     'tracking',
-    'notifications'
+    'notifications',
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -99,10 +100,9 @@ DATABASES = {
 
 # Rest framework configuration
 REST_FRAMEWORK = {
-    'DATETIME_FORMAT': '%m/%d/%Y %H:%M:%S',
-    'PAGE_SIZE': 24,
-    'DEFAULT_PAGE': 1,
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
+    'DATETIME_FORMAT': '%m/%d/%Y %H:%M:%S'
 }
 
 

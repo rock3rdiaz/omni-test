@@ -9,7 +9,7 @@ class OrderViewset(viewsets.ViewSet, ResponseMixin):
     """
     Orders application endpoints
     """
-    def list(self, request):
+    def create(self, request):
         try:
             serializer = OrderSerializer(data=request.data['products'], many=True)
             if serializer.is_valid(raise_exception=True):

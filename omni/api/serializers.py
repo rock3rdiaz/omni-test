@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from ecomerce.enums import ProductCategoryEnum
+from ecomerce.models import Shipment
 
 
 class ProductSerializer(serializers.Serializer):
@@ -50,3 +51,41 @@ class OrderSerializer(serializers.Serializer):
         if int(value) < 0:
             raise serializers.ValidationError('Units is <= 0')
         return value
+
+
+class PaymentSerializer(serializers.Serializer):
+    code = serializers.UUIDField()
+
+    def validate_code(self, value):
+        if not value:
+            raise serializers.ValidationError("Order code is invalid")
+        return value
+
+
+class ShipmentSerializer(serializers.Serializer):
+    order = serializers.UUIDField()
+    start_address = serializers.CharField()
+    end_address = serializers.CharField()
+
+    def validate_order(self, value):
+        if not value:
+            raise serializers.ValidationError("Order code is invalid")
+        return value
+
+    def validate_start_address(self, value):
+        if not value:
+            raise serializers.ValidationError("Start address code is invalid")
+        return value
+
+    def validate_end_address(self, value):
+        if not value:
+            raise serializers.ValidationError("End address code is invalid")
+        return value
+
+
+class ShipmentModelSerializer(serializers.ModelSerializer):
+    order = serializers.UUIDField(source='order.code')
+
+    class Meta:
+        model = Shipment
+        exclude = ['id',]

@@ -1,6 +1,4 @@
 from .base import *
-from django.urls import path, include
-
 
 ALLOWED_HOSTS = ['*']
 
