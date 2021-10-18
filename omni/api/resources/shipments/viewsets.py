@@ -7,7 +7,6 @@ from api.serializers import ShipmentSerializer, ShipmentModelSerializer
 from ecomerce.domain import OmniException, add_shipment
 from ecomerce.models import Shipment
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -15,7 +14,6 @@ class ShipmentViewset(viewsets.ViewSet, ResponseMixin):
     """
     Shipment application endpoints
     """
-    paginate_by = 2
 
     def list(self, request):
         try:
@@ -24,7 +22,7 @@ class ShipmentViewset(viewsets.ViewSet, ResponseMixin):
             data = {
                 'shipments': serializer.data
             }
-            return self.build_ok('Shipment added successfully', **data)
+            return self.build_ok('Shipment list', **data)
         except KeyError as ex:
             logger.error(f'---------------------------- {ex.args}')
             return self.build_bad_request('Invalid input, please check the documentation.')

@@ -1,14 +1,33 @@
+import logging
+
 from rest_framework import viewsets
 
 from api.mixins import ResponseMixin
-from api.serializers import ProductSerializer
+from api.serializers import ProductSerializer, ProductModelSerializer
 from ecomerce.domain import add_product_in_stock, OmniException, update_product_in_stock, delete_product_in_stock
+from ecomerce.models import Product
+
+
+logger = logging.getLogger(__name__)
 
 
 class ProductViewset(viewsets.ViewSet, ResponseMixin):
     """
     Products application endpoints
     """
+    def list(self, request):
+        try:
+            shipments = Product.objects.all()
+            serializer = ProductModelSerializer(shipments, many=True)
+            data = {
+                'products': serializer.data
+            }
+            return self.build_ok('Product list', **data)
+        except KeyError as ex:
+            logger.error(f'---------------------------- {ex.args}')
+            return self.build_bad_request('Invalid input, please check the documentation.')
+        except OmniException as ex:
+            return self.build_error(ex.message)
 
     def create(self, request):
         try:

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from ecomerce.enums import ProductCategoryEnum
-from ecomerce.models import Shipment
+from ecomerce.models import Shipment, Order, Product, Payment
 
 
 class ProductSerializer(serializers.Serializer):
@@ -88,4 +88,33 @@ class ShipmentModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shipment
-        exclude = ['id',]
+        exclude = ('id',)
+
+
+class OrderModelSerializer(serializers.ModelSerializer):
+    products = serializers.SerializerMethodField()
+
+    def get_products(self, instance):
+        return [str(p.code) for p in instance.products.all()]
+
+    class Meta:
+        model = Order
+        exclude = ('id',)
+
+
+class ProductModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        exclude = ('id',)
+
+
+class PaymentModelSerializer(serializers.ModelSerializer):
+    orders = serializers.SerializerMethodField()
+
+    def get_orders(self, instance):
+        return [str(p.code) for p in instance.orders.all()]
+
+    class Meta:
+        model = Payment
+        exclude = ('id',)
