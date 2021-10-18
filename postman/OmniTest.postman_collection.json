@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "528a164e-8d7e-41b5-bba6-be4db889e729",
+		"name": "OmniTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add-product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"CODE-3\",\n    \"name\": \"smartphone\",\n    \"description\": \"iPhone 13C\",\n    \"price\": 1230,\n    \"category\": 1,\n    \"units\": 56\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/products/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"laptop\",\n    \"description\": \"HP ultimate laptop 100 GB SD\",\n    \"price\": 1459,\n    \"category\": 1,\n    \"units\": 92\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/products/CODE-2/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products",
+						"CODE-2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/products/ABC-1/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products",
+						"ABC-1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"products\": [\n        {\n            \"code\": \"CODE-1\",\n            \"units\": 1\n        },\n        {\n            \"code\": \"CODE-3\",\n            \"units\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/orders/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-payment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orders\": [\n        {\n            \"code\": \"14fb2551-5dac-4f50-ad91-c673d05f3da7\"\n        }\n    ],\n    \"payment_amount\": 2160\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/payments/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"payments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-shipment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order\": \"14fb2551-5dac-4f50-ad91-c673d05f3da7\",\n    \"start_address\": \"san fernando valle\",\n    \"end_address\": \"Coliseo de cafe armenia quindio\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/shipments/",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"shipments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-shipments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/shipments?page=1",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"shipments"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/orders?page=1",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/products?page=1",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-payments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/payments?page=1",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"payments"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
